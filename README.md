@@ -21,7 +21,7 @@
 
 ---
 
-## 🧠 About the Project
+## About the Project
 
 This PowerShell-based automation sets up your Obsidian vault to sync silently with a private GitHub repo every 15 minutes. It ensures:
 
@@ -32,9 +32,9 @@ This PowerShell-based automation sets up your Obsidian vault to sync silently wi
 
 ---
 
-## ⚙️ Getting Started
+## Getting Started
 
-### ✅ Prerequisites
+### Prerequisites
 
 - [Git for Windows](https://git-scm.com/download/win)
 - Obsidian vault already created
@@ -42,7 +42,7 @@ This PowerShell-based automation sets up your Obsidian vault to sync silently wi
 
 ---
 
-### 🛠️ Vault + GitHub Setup
+### Vault + GitHub Setup
 
 Open PowerShell **as administrator** in your Obsidian vault folder.
 
@@ -98,7 +98,7 @@ git push -f origin main
 
 ---
 
-## 🤖 Automation Script
+## Automation Script
 
 Run this one-time PowerShell script to fully automate silent syncing:
 
@@ -115,7 +115,7 @@ This will:
 
 ---
 
-## 🧪 Usage
+## Usage
 
 Just update your notes in Obsidian — every 15 minutes the changes will be committed and pushed silently.
 
@@ -129,7 +129,7 @@ You can verify pushes by checking your GitHub repository.
 
 ---
 
-## 📬 Contact
+## Contact
 
 Made with ❤️ by [Sneh Bavarva](https://snehbavarva.com)  
 Feel free to fork, star, or suggest improvements!

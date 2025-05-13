@@ -108,7 +108,7 @@ git push -f origin main
 
 ## Automation Script
 
-Run this one-time PowerShell script in same administartor pwershell.exe to fully automate silent syncing:
+Run [this one-time PowerShell script setup_obsidian_sync.ps1](https://github.com/spbavarva/obsidian-sync-windows/blob/main/setup_obsidian_sync.ps1) in same administartor pwershell.exe to fully automate silent syncing:
 
 ```powershell
 Set-ExecutionPolicy Bypass -Scope Process -Force

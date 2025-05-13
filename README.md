@@ -23,11 +23,10 @@
 
 ## About the Project
 
-This PowerShell-based automation sets up your Obsidian vault to sync silently with a private GitHub repo every 15 minutes. It ensures:
+This PowerShell-based automation sets up your Obsidian vault to sync with a private GitHub repo every 15 minutes. 
 
 - Automatic commit + push of your notes
 - SSH key generation and registration
-- No command prompt popups
 - Runs entirely on Windows Task Scheduler
 
 ---
@@ -37,58 +36,67 @@ This PowerShell-based automation sets up your Obsidian vault to sync silently wi
 ### Prerequisites
 
 - [Git for Windows](https://git-scm.com/download/win)
-- Obsidian vault already created
+- Obsidian vault (already created or new)
 - A GitHub account
 
 ---
 
 ### Vault + GitHub Setup
 
-Open PowerShell **as administrator** in your Obsidian vault folder.
+Open PowerShell as **an administrator** in your Obsidian vault folder.
 
-#### 🔐 Generate SSH key
+#### Generate SSH key
 
 ```powershell
-ssh-keygen -t ed25519 -C "your_email@example.com"
+ssh-keygen -t ed25519 -C "YOUR_EMAIL@gmail.com"
 ```
 
-When prompted:
+When prompted:  (I recommend using Vault path for smooth flow and not default key path)
 > `Enter file in which to save the key:`  
 > ➜ Type: `D:\your_obsidian_vault\id_ed25519`
 
-#### 🔑 Start SSH agent & add key
+#### Enable and start SSH agent
 
 ```powershell
 Set-Service -Name ssh-agent -StartupType Automatic
 Start-Service ssh-agent
-ssh-add D:\your_obsidian_vault\id_ed25519
 ```
 
-#### 📋 Add key to GitHub
+```powershell
+ssh-add D:\your_obsidian_vault\id_ed25519
+```
+you should see output like: "_Identity added: path_"
+
+#### Add key to GitHub
 
 ```powershell
 Get-Content D:\your_obsidian_vault\id_ed25519.pub
 ```
 
-Copy the full key → Go to GitHub → **Settings → SSH and GPG Keys → New SSH Key** → Paste and save.
+Copy the full key (output start from `ssh-ed <SNIP> YOUR_EMAIL@gmail.com`) → Go to GitHub → **Settings → SSH and GPG Keys → New SSH Key** → Paste and save.
 
 Test the connection:
 
 ```powershell
 ssh -T git@github.com
 ```
+prompt `yes` and you should see `Hi @your_username! blah blah`
 
-#### 📁 Create private GitHub repo
+
+#### Create private GitHub repo
 
 - Name it: `obsidian-sync`
 - ✅ Mark it private
 - ❌ Do not initialize with README or .gitignore
 
-#### 💻 Initialize Git in your vault
+#### Initialize Git in your vault
 
 ```powershell
 git init
 git remote add origin git@github.com:yourusername/obsidian-sync.git
+```
+
+```powershell
 Set-Content .gitignore ".obsidian/cache/`n.obsidian/workspace`n.obsidian/plugins`nid_ed25519`nid_ed25519.pub`nscripts/"
 git add .
 git commit -m "Clean initial commit: safe sync setup"
@@ -100,7 +108,7 @@ git push -f origin main
 
 ## Automation Script
 
-Run this one-time PowerShell script to fully automate silent syncing:
+Run this one-time PowerShell script in same administartor pwershell.exe to fully automate silent syncing:
 
 ```powershell
 Set-ExecutionPolicy Bypass -Scope Process -Force
@@ -117,7 +125,7 @@ This will:
 
 ## Usage
 
-Just update your notes in Obsidian — every 15 minutes the changes will be committed and pushed silently.
+Just update your notes in Obsidian - every 15 minutes the changes will be committed and pushed.
 
 To test immediately:
 
